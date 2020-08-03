@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Todo.Views.TodoView"
+    Padding="20"
+    >
+    <StackLayout>
+        <Label 
+            Text="TODO BERTONI"
+            FontSize="20"
+            Margin="50"
+            HorizontalTextAlignment="Center"
+            />
+        <CollectionView
+            SelectedItem="{Binding CurrentItem}"
+            ItemsSource="{Binding Todos}"
+            SelectionMode="Single"
+            >
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Orientation="Horizontal">
+                        <Label
+                            VerticalTextAlignment="Center"
+                            Text="{Binding Model.Description}"
+                            FontSize="16"
+                           />
+                        <Grid
+                            HorizontalOptions="EndAndExpand"
+                            >
+                            <Label
+                                Text="Completed"
+                                TextColor="Green"
+                                VerticalTextAlignment="Center"
+                                HorizontalOptions="Center"
+                                Padding="50, 0"
+                                >
+                            </Label>
+                            <StackLayout
+                                Orientation="Horizontal"
+                                HorizontalOptions="EndAndExpand"
+                                IsVisible="{Binding IsCompleted}"
+                                BackgroundColor="White"
+                                >
+                                <Button
+                                    Command="{Binding CompleteCommand}"
+                                    Text="Completed"
+                                    Scale="0.5"
+                                    />
+                               
+                                <Button
+                                    Command="{Binding RemoveCommand}"
+                                    Text="Remove"
+                                    Scale="0.5"
+                                    />
+                            </StackLayout>
+                            
+                        </Grid>
+                        
+                    </StackLayout>
+                   
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <StackLayout>
+            <Entry 
+                Text="{Binding NewTodo, Mode=TwoWay}"
+                Placeholder="Enter a new todo"
+                />
+            <Button 
+                Command="{Binding AddCommand}"
+                Text="Add" 
+                />
+        </StackLayout>
+    </StackLayout>
+</ContentPage>
